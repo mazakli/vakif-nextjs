@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { NAV_LINKS, SITE } from '@/lib/constants';
 
@@ -42,7 +41,7 @@ export default function Header({ logoUrl, siteName, tagline }: HeaderProps) {
         {/* Logo */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
           {logoUrl ? (
-            <Image src={logoUrl} alt={displayName} width={42} height={42} style={{ borderRadius: '50%', objectFit: 'cover' }} />
+            <img src={logoUrl} alt={displayName} style={{ width: 42, height: 42, borderRadius: '50%', objectFit: 'cover' }} />
           ) : (
             <div style={{
               width: 42, height: 42, borderRadius: '50%',
