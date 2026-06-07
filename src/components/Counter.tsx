@@ -39,12 +39,17 @@ function StatItem({ number, suffix, label }: { number: number; suffix: string; l
   );
 }
 
-export default function Counter() {
+interface CounterProps {
+  stats?: { number: number; suffix: string; label: string }[];
+}
+
+export default function Counter({ stats }: CounterProps) {
+  const items = stats || STATS;
   return (
     <section style={{ background: 'var(--dark-green)', padding: '60px 0' }}>
       <div className="container">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px,1fr))', gap: '20px' }}>
-          {STATS.map((s, i) => (
+          {items.map((s, i) => (
             <StatItem key={i} {...s} active={false} />
           ))}
         </div>
