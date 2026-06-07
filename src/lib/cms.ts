@@ -13,6 +13,30 @@ export async function getIcerikler(tur: string) {
   }
 }
 
+export async function getBlogYazilari() {
+  try {
+    const res = await fetch(`${CMS_URL}/api/public/${MARKA}/icerikler?tur=blog`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    return await res.json();
+  } catch {
+    return [];
+  }
+}
+
+export async function getBlogYazisi(slug: string) {
+  try {
+    const res = await fetch(`${CMS_URL}/api/public/${MARKA}/icerik/${slug}`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
 export async function getAyarlar() {
   try {
     const res = await fetch(`${CMS_URL}/api/public/${MARKA}/ayarlar`, {

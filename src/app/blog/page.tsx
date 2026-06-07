@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { BLOG_POSTS } from '@/lib/constants';
+import { getBlogYazilari } from '@/lib/cms';
 import { IconArrowRight, IconGlobe, IconBell, IconNewspaper } from '@/components/Icons';
 
 export const metadata: Metadata = {
@@ -14,7 +15,23 @@ function BlogIcon({ category }: { category: string }) {
   return <IconNewspaper size={56} color="rgba(244,233,216,.5)" />;
 }
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const cmsPosts = await getBlogYazilari();
+
+  // CMS'de yazı varsa onu kullan, yoksa sabit listeye dön
+  const posts = cmsPosts.length > 0
+    ? cmsPosts.map((p: any) => ({
+        slug: p.slug,
+        title: p.baslik,
+        excerpt: p.ozet || '',
+        category: p.ekstra?.kategori || 'Haber',
+        author: p.ekstra?.yazar || 'Vakıf',
+        date: p.yayinlandi ? new Date(p.yayinlandi).toLocaleDateString('tr-TR') : '',
+        gorsel_url: p.gorsel_url || '',
+        icerik: p.icerik || '',
+      }))
+    : BLOG_POSTS;
+
   return (
     <>
       <div style={{ background: 'linear-gradient(135deg, #012116 60%, #034228)', padding: '80px 0', textAlign: 'center' }}>
@@ -30,10 +47,10 @@ export default function BlogPage() {
       <section className="section-pad" style={{ background: 'var(--cream-light)' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px,1fr))', gap: '28px' }}>
-            {BLOG_POSTS.map(post => (
+            {posts.map((post: any) => (
               <article key={post.slug} style={{ background: '#fff', borderRadius: '14px', overflow: 'hidden', boxShadow: '0 4px 24px rgba(1,33,22,.1)', transition: 'all .3s' }}>
-                <div style={{ height: 200, background: 'linear-gradient(135deg, #012116, #034228)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <BlogIcon category={post.category} />
+                <div style={{ height: 200, background: post.gorsel_url ? 'none' : 'linear-gradient(135deg, #012116, #034228)', backgroundImage: post.gorsel_url ? `url(${post.gorsel_url})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {!post.gorsel_url && <BlogIcon category={post.category} />}
                 </div>
                 <div style={{ padding: '22px' }}>
                   <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
