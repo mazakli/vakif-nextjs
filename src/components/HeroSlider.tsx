@@ -3,7 +3,26 @@ import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { SLIDES } from '@/lib/constants';
 
-export default function HeroSlider() {
+type Slide = {
+  baslik?: string;
+  aciklama?: string;
+  gorsel_url?: string;
+  ekstra?: {
+    buton1_metin?: string;
+    buton1_url?: string;
+    buton2_metin?: string;
+    buton2_url?: string;
+  };
+  // Statik tip
+  title?: string;
+  text?: string;
+  image?: string;
+  btn1?: { label: string; href: string };
+  btn2?: { label: string; href: string };
+};
+
+export default function HeroSlider({ cmsSlides }: { cmsSlides?: Slide[] }) {
+  const slides: Slide[] = (cmsSlides && cmsSlides.length > 0) ? cmsSlides : SLIDES;
   const [current, setCurrent] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -15,19 +34,26 @@ export default function HeroSlider() {
   }, [isAnimating]);
 
   useEffect(() => {
-    const timer = setInterval(() => go((current + 1) % SLIDES.length), 5500);
+    const timer = setInterval(() => go((current + 1) % slides.length), 5500);
     return () => clearInterval(timer);
-  }, [current, go]);
+  }, [current, go, slides.length]);
 
-  const slide = SLIDES[current];
+  const raw = slides[current];
+  const slide = {
+    title: raw.baslik || raw.title || '',
+    text: raw.aciklama || raw.text || '',
+    image: raw.gorsel_url || raw.image || '',
+    btn1: { label: raw.ekstra?.buton1_metin || raw.btn1?.label || 'Devamı', href: raw.ekstra?.buton1_url || raw.btn1?.href || '/' },
+    btn2: { label: raw.ekstra?.buton2_metin || raw.btn2?.label || 'Bağış Yap', href: raw.ekstra?.buton2_url || raw.btn2?.href || '/bagis-yap' },
+  };
 
   return (
     <section style={{ position: 'relative', height: 'min(90vh, 680px)', overflow: 'hidden' }}>
       {/* Background */}
-      {SLIDES.map((s, i) => (
+      {slides.map((s, i) => (
         <div key={i} style={{
           position: 'absolute', inset: 0,
-          background: `linear-gradient(rgba(1,33,22,0.65), rgba(1,33,22,0.75)), url(${s.image}) center/cover no-repeat`,
+          background: `linear-gradient(rgba(1,33,22,0.65), rgba(1,33,22,0.75)), url(${(s as any).gorsel_url || (s as any).image || ''}) center/cover no-repeat`,
           opacity: i === current ? 1 : 0,
           transition: 'opacity .7s ease',
           zIndex: 0,
@@ -69,7 +95,7 @@ export default function HeroSlider() {
 
       {/* Dots */}
       <div style={{ position: 'absolute', bottom: '28px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '10px', zIndex: 2 }}>
-        {SLIDES.map((_, i) => (
+        {slides.map((_, i) => (
           <button key={i} onClick={() => go(i)} style={{
             width: i === current ? 28 : 10, height: 10, borderRadius: '5px',
             background: i === current ? 'var(--accent)' : 'rgba(255,255,255,.4)',
@@ -79,14 +105,14 @@ export default function HeroSlider() {
       </div>
 
       {/* Arrows */}
-      <button onClick={() => go((current - 1 + SLIDES.length) % SLIDES.length)} style={{
+      <button onClick={() => go((current - 1 + slides.length) % slides.length)} style={{
         position: 'absolute', left: '20px', top: '50%', transform: 'translateY(-50%)',
         background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.2)',
         color: '#fff', width: 44, height: 44, borderRadius: '50%',
         display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: 2,
         fontSize: '1.2rem', transition: 'background .2s',
       }}>‹</button>
-      <button onClick={() => go((current + 1) % SLIDES.length)} style={{
+      <button onClick={() => go((current + 1) % slides.length)} style={{
         position: 'absolute', right: '20px', top: '50%', transform: 'translateY(-50%)',
         background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.2)',
         color: '#fff', width: 44, height: 44, borderRadius: '50%',

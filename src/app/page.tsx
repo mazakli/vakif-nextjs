@@ -3,6 +3,7 @@ import Link from 'next/link';
 import HeroSlider from '@/components/HeroSlider';
 import Counter from '@/components/Counter';
 import { BLOG_POSTS, SITE } from '@/lib/constants';
+import { getIcerikler } from '@/lib/cms';
 import { IconHeart, IconArrowRight, IconGlobe, IconWater, IconCheck, IconBell, IconGlobe as IconGlobe2, IconNewspaper } from '@/components/Icons';
 
 export const metadata: Metadata = {
@@ -16,10 +17,12 @@ function BlogCategoryIcon({ category }: { category: string }) {
   return <IconNewspaper size={52} color="rgba(244,233,216,.6)" />;
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const cmsSlides = await getIcerikler('slider');
+
   return (
     <>
-      <HeroSlider />
+      <HeroSlider cmsSlides={cmsSlides} />
 
       {/* Duyuru Banner */}
       <div style={{ background: 'var(--accent)', padding: '14px 0' }}>
