@@ -1,10 +1,19 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { NAV_LINKS, SITE } from '@/lib/constants';
 
-export default function Header() {
+interface HeaderProps {
+  logoUrl?: string | null;
+  siteName?: string;
+  tagline?: string;
+}
+
+export default function Header({ logoUrl, siteName, tagline }: HeaderProps) {
+  const displayName = siteName || SITE.name;
+  const displayTagline = tagline || SITE.tagline;
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -32,14 +41,18 @@ export default function Header() {
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '70px' }}>
         {/* Logo */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-          <div style={{
-            width: 42, height: 42, borderRadius: '50%',
-            background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontWeight: 800, fontSize: '1.2rem', color: '#012116',
-          }}>V</div>
+          {logoUrl ? (
+            <Image src={logoUrl} alt={displayName} width={42} height={42} style={{ borderRadius: '50%', objectFit: 'cover' }} />
+          ) : (
+            <div style={{
+              width: 42, height: 42, borderRadius: '50%',
+              background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontWeight: 800, fontSize: '1.2rem', color: '#012116',
+            }}>V</div>
+          )}
           <div>
-            <div style={{ color: 'var(--cream)', fontWeight: 800, fontSize: '1.1rem', lineHeight: 1.1 }}>{SITE.name}</div>
-            <div style={{ color: 'var(--accent)', fontSize: '.7rem', letterSpacing: '1px' }}>{SITE.tagline}</div>
+            <div style={{ color: 'var(--cream)', fontWeight: 800, fontSize: '1.1rem', lineHeight: 1.1 }}>{displayName}</div>
+            <div style={{ color: 'var(--accent)', fontSize: '.7rem', letterSpacing: '1px' }}>{displayTagline}</div>
           </div>
         </Link>
 
