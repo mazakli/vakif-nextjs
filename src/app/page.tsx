@@ -4,9 +4,9 @@ import HeroSlider from '@/components/HeroSlider';
 import { BLOG_POSTS, SITE, STATS } from '@/lib/constants';
 import { getIcerikler, getBlogYazilari } from '@/lib/cms';
 import {
-  IconArrowRight,
-  IconFood, IconWater, IconEducation, IconHealth, IconHouse, IconOrphan,
-  IconUsers, IconHeart, IconAward, IconBarChart, IconHandshake,
+  IconServiceFood, IconServiceClothes, IconServiceEducation,
+  IconServiceOrphan, IconServiceElderly, IconServiceEmergency,
+  IconArrowRight, IconHeart, IconUsers, IconAward, IconHandshake, IconBarChart, IconClothes,
   IconPhone, IconMail, IconMapPin,
 } from '@/components/Icons';
 
@@ -15,42 +15,76 @@ export const metadata: Metadata = {
   description: SITE.description,
 };
 
-// Service area cards matching SAYE design
-const SERVICE_AREAS = [
-  { label: 'Gıda Yardımları', desc: 'İhtiyaç sahibi ailelere düzenli gıda kolisi ve sıcak yemek desteği sağlıyoruz.', href: '/projelerimiz', Icon: IconFood },
-  { label: 'Kıyafet Yardımları', desc: 'Mevsimlik kıyafet yardımı ile çocuk ve yetişkinlere destek oluyoruz.', href: '/projelerimiz', Icon: IconHealth },
-  { label: 'Eğitim Destekleri', desc: 'Burs ve kırtasiye yardımı ile gençlerin eğitim hayatını destekliyoruz.', href: '/projelerimiz', Icon: IconEducation },
-  { label: 'Yetim Destek Programı', desc: 'Yetim çocukların tüm ihtiyaçlarını karşılayan kapsamlı destek programı.', href: '/projelerimiz', Icon: IconOrphan },
-  { label: 'Yaşlı Destek Programı', desc: 'Yaşlı ve kimsesiz bireylere ev ziyareti, gıda ve sağlık desteği veriyoruz.', href: '/projelerimiz', Icon: IconUsers },
-  { label: 'Acil Yardım Çalışmaları', desc: 'Doğal afet ve kriz anlarında hızlı müdahale ile destek sağlıyoruz.', href: '/projelerimiz', Icon: IconHandshake },
+/* ── Hizmet Alanları ── */
+const SERVICES = [
+  {
+    label: 'Gıda Yardımları',
+    desc: 'İhtiyaç sahibi ailelere düzenli gıda desteği sağlıyoruz.',
+    Icon: IconServiceFood,
+  },
+  {
+    label: 'Kıyafet Yardımları',
+    desc: 'Mevsimine uygun kıyafetleri ihtiyaç sahiplerine ulaştırıyoruz.',
+    Icon: IconServiceClothes,
+  },
+  {
+    label: 'Eğitim Destekleri',
+    desc: 'Çocuklarımızın eğitimine katkı sağlıyor, geleceğe umut oluyoruz.',
+    Icon: IconServiceEducation,
+  },
+  {
+    label: 'Yetim Destek Programı',
+    desc: 'Yetim çocuklarımızın her zaman yanında oluyoruz.',
+    Icon: IconServiceOrphan,
+  },
+  {
+    label: 'Yaşlı Destek Programı',
+    desc: 'Yaşlı büyüklerimizin hayatını kolaylaştırıyoruz.',
+    Icon: IconServiceElderly,
+  },
+  {
+    label: 'Acil Yardım Çalışmaları',
+    desc: 'Acil durumlarda hızlı yardım ulaştırıyoruz.',
+    Icon: IconServiceEmergency,
+  },
 ];
 
-// Stats matching SAYE screenshots
+/* ── İstatistikler ── */
 const SAYE_STATS = [
-  { number: 453,   suffix: '+',    label: 'Aileye Ulaşıldı',        Icon: IconHeart },
-  { number: 1250,  suffix: '+',    label: 'Kıyafet Dağıtıldı',      Icon: IconAward },
-  { number: 380,   suffix: '+',    label: 'Çocuğa Destek Verildi',   Icon: IconUsers },
-  { number: 120,   suffix: '+',    label: 'Gönüllü',                 Icon: IconHandshake },
-  { number: 15000, suffix: '+',    label: 'Hayata Dokunduk',          Icon: IconBarChart },
+  { number: 453,   suffix: '+', label: 'Aileye Ulaşıldı',       Icon: IconUsers    },
+  { number: 1250,  suffix: '+', label: 'Kıyafet Dağıtıldı',     Icon: IconClothes  },
+  { number: 380,   suffix: '+', label: 'Çocuğa Destek Verildi', Icon: IconAward    },
+  { number: 120,   suffix: '+', label: 'Gönüllü',               Icon: IconHandshake },
+  { number: 15000, suffix: '+', label: 'Hayata Dokunduk',        Icon: IconHeart    },
 ];
 
-const SOCIAL_LINKS = [
-  {
-    href: SITE.social.instagram, label: 'Instagram',
-    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>,
-  },
-  {
-    href: SITE.social.facebook, label: 'Facebook',
-    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>,
-  },
-  {
-    href: SITE.social.twitter, label: 'X / Twitter',
-    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4l16 16M4 20L20 4"/></svg>,
-  },
-  {
-    href: SITE.social.youtube, label: 'YouTube',
-    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>,
-  },
+/* ── Placeholder galeri görselleri ── */
+const GALLERY = [
+  'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=300&q=70',
+  'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=300&q=70',
+  'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=300&q=70',
+  'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=300&q=70',
+  'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=300&q=70',
+];
+
+/* ── Sosyal Medya ── */
+const SOCIALS = [
+  { href: SITE.social.instagram, label: 'Instagram',
+    icon: <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> },
+  { href: SITE.social.facebook, label: 'Facebook',
+    icon: <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg> },
+  { href: SITE.social.twitter, label: 'X',
+    icon: <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4l16 16M4 20L20 4"/></svg> },
+  { href: SITE.social.youtube, label: 'YouTube',
+    icon: <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg> },
+];
+
+/* ── Placeholder faaliyet görselleri ── */
+const ACTIVITY_IMAGES = [
+  'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=75',
+  'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=400&q=75',
+  'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=400&q=75',
+  'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=400&q=75',
 ];
 
 export default async function HomePage() {
@@ -60,179 +94,178 @@ export default async function HomePage() {
     getBlogYazilari(),
   ]);
 
-  // Stats — prefer CMS, fall back to SAYE_STATS
   const sayac = cmsSayac[0] || null;
-  const stats: { number: number; suffix: string; label: string }[] = sayac?.ekstra?.items || SAYE_STATS;
+  const stats: typeof SAYE_STATS = sayac?.ekstra?.items || SAYE_STATS;
 
-  // Activities / blog posts — 4 cols in SAYE design
   const activities = cmsBlog.length > 0
-    ? cmsBlog.slice(0, 4).map((p: any) => ({
+    ? cmsBlog.slice(0, 4).map((p: any, i: number) => ({
         slug: p.slug,
         title: p.baslik,
         excerpt: p.ozet || '',
         category: p.ekstra?.kategori || 'Faaliyet',
-        date: p.yayinlandi ? new Date(p.yayinlandi).toLocaleDateString('tr-TR') : '',
-        gorsel_url: p.gorsel_url || '',
+        date: p.yayinlandi ? new Date(p.yayinlandi).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }) : '',
+        image: p.gorsel_url || ACTIVITY_IMAGES[i % ACTIVITY_IMAGES.length],
       }))
-    : BLOG_POSTS.slice(0, 4).map(p => ({ ...p, gorsel_url: (p as any).image || '' }));
+    : BLOG_POSTS.slice(0, 4).map((p, i) => ({
+        slug: p.slug,
+        title: p.title,
+        excerpt: p.excerpt,
+        category: p.category,
+        date: p.date,
+        image: ACTIVITY_IMAGES[i % ACTIVITY_IMAGES.length],
+      }));
 
   return (
     <>
-      {/* Hero */}
+      {/* ── 1. HERO ── */}
       <HeroSlider cmsSlides={cmsSlides} />
 
-      {/* ── Hizmet Alanlarımız Strip ── */}
-      <section style={{ background: '#fff', borderBottom: '1px solid #e8e0d4', padding: '60px 0' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <p style={{ color: 'var(--accent)', fontWeight: 700, letterSpacing: '2px', fontSize: '.75rem', textTransform: 'uppercase', marginBottom: '10px' }}>Neler Yapıyoruz</p>
-            <h2 style={{ color: '#012116', fontSize: 'clamp(1.5rem,3vw,2rem)', fontWeight: 800, margin: 0 }}>Hizmet Alanlarımız</h2>
-          </div>
+      {/* ── 2. HİZMET ALANLARI ── */}
+      <section style={{ background: '#f8f4ee', borderBottom: '1px solid #e8e0d5' }}>
+        <div className="container" style={{ padding: '0 24px' }}>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '20px',
-          }} className="service-grid">
-            {SERVICE_AREAS.map(({ label, desc, href, Icon }) => (
+            gridTemplateColumns: 'repeat(6,1fr)',
+          }} className="saye-services">
+            {SERVICES.map(({ label, desc, Icon }, i) => (
               <div key={label} style={{
-                border: '1px solid #e5ddd3',
-                borderRadius: '10px',
-                padding: '28px 24px',
-                background: '#fff',
-                transition: 'all .3s',
-              }} className="service-card">
-                <div style={{
-                  width: 52, height: 52,
-                  borderRadius: '12px',
-                  background: 'rgba(1,33,22,.06)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  marginBottom: '16px',
-                }}>
-                  <Icon size={28} color="#012116" />
+                padding: '28px 18px 24px',
+                borderRight: i < 5 ? '1px solid #e5ddd3' : 'none',
+                background: '#f8f4ee',
+                transition: 'background .25s',
+              }} className="saye-service-card">
+                <div style={{ marginBottom: 12, color: '#012116' }}>
+                  <Icon size={40} color="#012116" />
                 </div>
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#012116', marginBottom: '8px' }}>{label}</h3>
-                <p style={{ color: '#666', fontSize: '.85rem', lineHeight: 1.6, marginBottom: '16px' }}>{desc}</p>
-                <Link href={href} style={{
-                  color: 'var(--accent)', fontWeight: 700, fontSize: '.83rem',
-                  textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '5px',
+                <h3 style={{
+                  color: '#012116', fontWeight: 800,
+                  fontSize: '.8rem', letterSpacing: '.3px',
+                  textTransform: 'uppercase', marginBottom: 6, lineHeight: 1.3,
+                }}>{label}</h3>
+                <p style={{ color: '#666', fontSize: '.78rem', lineHeight: 1.55, marginBottom: 12 }}>{desc}</p>
+                <Link href="/projelerimiz" style={{
+                  color: '#c8a96e', fontWeight: 700, fontSize: '.75rem',
+                  textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4,
                 }}>
-                  Detaylı İncele <IconArrowRight size={13} color="var(--accent)" />
+                  Detaylı İncele <IconArrowRight size={11} color="#c8a96e" />
                 </Link>
               </div>
             ))}
           </div>
         </div>
         <style>{`
-          @media (max-width: 900px) { .service-grid { grid-template-columns: repeat(2,1fr) !important; } }
-          @media (max-width: 540px) { .service-grid { grid-template-columns: 1fr !important; } }
-          .service-card:hover { box-shadow: 0 8px 32px rgba(1,33,22,.1); border-color: var(--accent); transform: translateY(-2px); }
+          @media (max-width: 960px) { .saye-services { grid-template-columns: repeat(3,1fr) !important; } .saye-services > div { border-right: none !important; border-bottom: 1px solid #e5ddd3; } }
+          @media (max-width: 560px) { .saye-services { grid-template-columns: repeat(2,1fr) !important; } }
+          .saye-service-card:hover { background: #fff !important; }
         `}</style>
       </section>
 
-      {/* ── İstatistikler / Stats Bar ── */}
-      <section style={{ background: 'var(--dark-green)', padding: '52px 0' }}>
+      {/* ── 3. İSTATİSTİKLER ── */}
+      <section style={{ background: '#012116' }}>
         <div className="container">
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(5, 1fr)',
-            gap: '0',
-          }} className="stats-grid">
-            {stats.map((s, i) => {
+            gridTemplateColumns: 'repeat(5,1fr)',
+          }} className="saye-stats">
+            {stats.map((s: any, i: number) => {
               const StatIcon = (SAYE_STATS[i] || SAYE_STATS[0]).Icon;
               return (
                 <div key={i} style={{
-                  textAlign: 'center',
-                  padding: '24px 16px',
+                  padding: '32px 16px',
                   borderRight: i < stats.length - 1 ? '1px solid rgba(244,233,216,.1)' : 'none',
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
                 }}>
-                  <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'center' }}>
-                    <StatIcon size={30} color="rgba(200,169,110,.7)" />
+                  <StatIcon size={28} color="rgba(200,169,110,.75)" />
+                  <div style={{
+                    fontSize: 'clamp(1.7rem,3vw,2.4rem)',
+                    fontWeight: 900, color: '#c8a96e', lineHeight: 1,
+                  }}>
+                    {(s.number || 0).toLocaleString('tr-TR')}{s.suffix || ''}
                   </div>
-                  <div style={{ fontSize: 'clamp(1.8rem,3.5vw,2.6rem)', fontWeight: 900, color: 'var(--accent)', lineHeight: 1, marginBottom: '6px' }}>
-                    {s.number.toLocaleString('tr-TR')}{s.suffix}
+                  <div style={{ color: 'rgba(244,233,216,.7)', fontSize: '.72rem', fontWeight: 600, letterSpacing: '.8px', textTransform: 'uppercase', textAlign: 'center' }}>
+                    {s.label}
                   </div>
-                  <div style={{ color: 'rgba(244,233,216,.7)', fontSize: '.85rem', fontWeight: 500 }}>{s.label}</div>
                 </div>
               );
             })}
           </div>
         </div>
         <style>{`
-          @media (max-width: 900px) { .stats-grid { grid-template-columns: repeat(3,1fr) !important; } }
-          @media (max-width: 540px) { .stats-grid { grid-template-columns: repeat(2,1fr) !important; } }
+          @media (max-width: 900px)  { .saye-stats { grid-template-columns: repeat(3,1fr) !important; } }
+          @media (max-width: 560px)  { .saye-stats { grid-template-columns: repeat(2,1fr) !important; } }
         `}</style>
       </section>
 
-      {/* ── Son Faaliyetlerimiz ── */}
-      <section style={{ background: 'var(--cream-light)', padding: '70px 0' }}>
+      {/* ── 4. SON FAALİYETLERİMİZ ── */}
+      <section style={{ background: '#fff', padding: '64px 0' }}>
         <div className="container">
-          {/* Decorated Title Row */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '40px', flexWrap: 'wrap', gap: '16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <div style={{ width: 5, height: 40, background: 'var(--accent)', borderRadius: '3px' }} />
-              <div>
-                <p style={{ color: 'var(--accent)', fontWeight: 700, letterSpacing: '2px', fontSize: '.72rem', textTransform: 'uppercase', margin: '0 0 4px' }}>Haberler &amp; Faaliyetler</p>
-                <h2 style={{ color: '#012116', fontSize: 'clamp(1.4rem,2.5vw,1.9rem)', fontWeight: 800, margin: 0 }}>Son Faaliyetlerimiz</h2>
+          {/* Başlık Satırı */}
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            marginBottom: 36, flexWrap: 'wrap', gap: 16,
+          }}>
+            {/* Süslemeli başlık */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <div style={{ width: 30, height: 1, background: '#c8a96e' }} />
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#c8a96e" stroke="none">
+                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                </svg>
+              </div>
+              <h2 style={{
+                color: '#012116', fontSize: 'clamp(1.1rem,2vw,1.35rem)',
+                fontWeight: 800, letterSpacing: '1.5px', textTransform: 'uppercase',
+              }}>SON FAALİYETLERİMİZ</h2>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#c8a96e" stroke="none">
+                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                </svg>
+                <div style={{ width: 30, height: 1, background: '#c8a96e' }} />
               </div>
             </div>
             <Link href="/blog" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '8px',
-              padding: '10px 22px',
-              background: 'transparent',
-              border: '2px solid #012116',
-              color: '#012116',
-              borderRadius: '6px',
-              fontWeight: 700,
-              fontSize: '.85rem',
-              textDecoration: 'none',
-              letterSpacing: '.5px',
-              transition: 'all .2s',
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '9px 20px',
+              border: '1.5px solid #012116', color: '#012116',
+              borderRadius: 5, fontWeight: 700, fontSize: '.78rem',
+              letterSpacing: '.8px', textDecoration: 'none',
             }}>
-              TÜM FAALİYETLER <IconArrowRight size={14} color="#012116" />
+              TÜM FAALİYETLER <IconArrowRight size={13} color="#012116" />
             </Link>
           </div>
 
-          {/* 4-column activity cards */}
+          {/* 4 Kolon Kartlar */}
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '20px',
-          }} className="activity-grid">
-            {activities.map((post: any) => (
+            display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 18,
+          }} className="saye-activities">
+            {activities.map((post: { slug: string; title: string; excerpt: string; category: string; date: string; image: string }, i: number) => (
               <article key={post.slug} style={{
-                borderRadius: '10px',
-                overflow: 'hidden',
+                borderRadius: 8, overflow: 'hidden',
                 background: '#fff',
-                boxShadow: '0 2px 16px rgba(1,33,22,.08)',
-                transition: 'all .3s',
-              }} className="activity-card">
+                border: '1px solid #ebe5dc',
+                transition: 'all .25s',
+              }} className="saye-act-card">
+                {/* Görsel */}
                 <div style={{
-                  height: 180,
-                  background: post.gorsel_url
-                    ? `url(${post.gorsel_url}) center/cover`
-                    : 'linear-gradient(135deg, #012116, #034228)',
+                  height: 175,
+                  background: post.image
+                    ? `url(${post.image}) center/cover`
+                    : `linear-gradient(135deg, #012116, #034228)`,
                   position: 'relative',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: 12, left: 12,
-                    background: 'var(--accent)',
-                    color: '#012116',
-                    padding: '3px 10px',
-                    borderRadius: '4px',
-                    fontSize: '.7rem',
-                    fontWeight: 800,
-                    letterSpacing: '.5px',
-                  }}>{post.category}</div>
-                </div>
-                <div style={{ padding: '18px' }}>
-                  <p style={{ color: '#999', fontSize: '.75rem', marginBottom: '8px' }}>{post.date}</p>
-                  <h3 style={{ fontSize: '.93rem', fontWeight: 700, color: '#012116', marginBottom: '8px', lineHeight: 1.4 }}>{post.title}</h3>
-                  <p style={{ color: '#777', fontSize: '.82rem', lineHeight: 1.6, marginBottom: '14px' }}>{post.excerpt}</p>
+                }} />
+                {/* İçerik */}
+                <div style={{ padding: '16px 16px 18px' }}>
+                  <p style={{ color: '#999', fontSize: '.72rem', marginBottom: 7 }}>{post.date}</p>
+                  <h3 style={{
+                    color: '#012116', fontSize: '.9rem', fontWeight: 800,
+                    lineHeight: 1.35, marginBottom: 8,
+                  }}>{post.title}</h3>
+                  <p style={{ color: '#666', fontSize: '.78rem', lineHeight: 1.6, marginBottom: 12 }}>{post.excerpt}</p>
                   <Link href={`/blog/${post.slug}`} style={{
-                    color: 'var(--accent)', fontWeight: 700, fontSize: '.8rem',
-                    textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '5px',
+                    color: '#c8a96e', fontWeight: 700, fontSize: '.75rem',
+                    textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4,
                   }}>
-                    Devamını Oku <IconArrowRight size={12} color="var(--accent)" />
+                    Devamını Oku <IconArrowRight size={11} color="#c8a96e" />
                   </Link>
                 </div>
               </article>
@@ -240,131 +273,113 @@ export default async function HomePage() {
           </div>
         </div>
         <style>{`
-          @media (max-width: 1024px) { .activity-grid { grid-template-columns: repeat(2,1fr) !important; } }
-          @media (max-width: 540px)  { .activity-grid { grid-template-columns: 1fr !important; } }
-          .activity-card:hover { box-shadow: 0 8px 32px rgba(1,33,22,.14); transform: translateY(-3px); }
+          @media (max-width: 1024px) { .saye-activities { grid-template-columns: repeat(2,1fr) !important; } }
+          @media (max-width: 540px)  { .saye-activities { grid-template-columns: 1fr !important; } }
+          .saye-act-card:hover { box-shadow: 0 8px 28px rgba(1,33,22,.12); transform: translateY(-3px); }
         `}</style>
       </section>
 
-      {/* ── Alt 3 Kolon Bölümü ── */}
-      <section style={{ background: '#f7f2ea', padding: '64px 0' }}>
+      {/* ── 5. ALT 3 KOLON: GALERİ | BAĞIŞ CTA | GÖNÜLLÜ ── */}
+      <section style={{ background: '#f8f4ee', padding: '52px 0' }}>
         <div className="container">
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gap: '28px',
-            alignItems: 'start',
-          }} className="bottom-three-grid">
+            display: 'grid', gridTemplateColumns: '1.1fr 0.9fr 1fr', gap: 24, alignItems: 'start',
+          }} className="saye-bottom-grid">
 
-            {/* Sol: Fotoğraf Galerisi Önizleme */}
+            {/* Sol: Galeriden Kareler */}
             <div>
-              <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#012116', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '1px' }}>Galeri</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-                {[1,2,3,4].map(i => (
+              <h3 style={{
+                color: '#012116', fontWeight: 800, fontSize: '.82rem',
+                letterSpacing: '1.2px', textTransform: 'uppercase', marginBottom: 16,
+              }}>GALERİDEN KARELER</h3>
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                {GALLERY.map((src, i) => (
                   <div key={i} style={{
-                    aspectRatio: '1',
-                    borderRadius: '8px',
-                    background: `linear-gradient(135deg, hsl(${140 + i * 20},30%,${30 + i * 5}%), hsl(${40 + i * 10},40%,${50 + i * 5}%))`,
-                    overflow: 'hidden',
+                    width: 'calc(20% - 5px)', aspectRatio: '1',
+                    borderRadius: 5, overflow: 'hidden',
+                    background: `url(${src}) center/cover`,
+                    flexShrink: 0,
                   }} />
                 ))}
               </div>
-              <Link href="/projelerimiz" style={{
-                display: 'inline-flex', alignItems: 'center', gap: '6px',
-                marginTop: '14px',
-                color: 'var(--accent)',
-                fontWeight: 700,
-                fontSize: '.83rem',
-                textDecoration: 'none',
-              }}>
-                Tüm Galeri <IconArrowRight size={13} color="var(--accent)" />
-              </Link>
             </div>
 
-            {/* Orta: Koyu Yeşil Bağış CTA Kartı */}
+            {/* Orta: Koyu Yeşil Bağış Kartı */}
             <div style={{
               background: '#012116',
-              borderRadius: '12px',
+              borderRadius: 12,
               padding: '36px 28px',
               textAlign: 'center',
-              boxShadow: '0 12px 40px rgba(1,33,22,.2)',
             }}>
-              {/* Logo placeholder */}
+              {/* Logo */}
+              <svg width="52" height="52" viewBox="0 0 60 60" fill="none" style={{ margin: '0 auto 14px' }}>
+                <circle cx="30" cy="30" r="28" fill="rgba(200,169,110,0.2)" stroke="#c8a96e" strokeWidth="1.5"/>
+                <path d="M30 42s-13-8-13-17a7.5 7.5 0 0113-5.14A7.5 7.5 0 0143 25c0 9-13 17-13 17z" fill="#c8a96e"/>
+                <line x1="30" y1="22" x2="30" y2="14" stroke="#012116" strokeWidth="2" strokeLinecap="round"/>
+                <path d="M30 18c-1.5-2.5-4-2.5-4-2.5s0 2.5 2 3.5" stroke="#012116" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
+                <path d="M30 17c1.5-2.5 4-2.5 4-2.5s0 2.5-2 3.5" stroke="#012116" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
+              </svg>
+              {/* Script yazı */}
               <div style={{
-                width: 60, height: 60,
-                borderRadius: '50%',
-                background: 'var(--accent)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                margin: '0 auto 16px',
-                fontWeight: 900, fontSize: '1.4rem', color: '#012116',
-              }}>V</div>
-              <h3 style={{ color: 'var(--cream)', fontSize: '1.1rem', fontWeight: 800, marginBottom: '10px' }}>{SITE.name}</h3>
-              <p style={{ color: 'rgba(244,233,216,.65)', fontSize: '.85rem', lineHeight: 1.6, marginBottom: '10px' }}>
-                {SITE.tagline}
-              </p>
-              <p style={{ color: 'rgba(244,233,216,.55)', fontSize: '.8rem', lineHeight: 1.6, marginBottom: '24px' }}>
-                Her bağışınız bir ailenin hayatını değiştirir. Siz de bu güzel harekete katılın.
+                fontFamily: 'var(--font-dancing), "Dancing Script", cursive',
+                color: '#c8a96e',
+                fontSize: '1.9rem',
+                fontWeight: 700,
+                lineHeight: 1.25,
+                marginBottom: 8,
+              }}>
+                SAYEnizde<br />iyilik büyüyor.
+              </div>
+              <p style={{ color: 'rgba(244,233,216,.6)', fontSize: '.8rem', lineHeight: 1.6, marginBottom: 22 }}>
+                Küçük bir destek, büyük bir değişim yaratır.
               </p>
               <Link href="/bagis-yap" style={{
-                display: 'inline-flex', alignItems: 'center', gap: '8px',
-                padding: '13px 30px',
-                background: 'var(--accent)',
-                color: '#012116',
-                borderRadius: '8px',
-                fontWeight: 800,
-                fontSize: '.95rem',
-                textDecoration: 'none',
-                width: '100%',
-                justifyContent: 'center',
-                boxSizing: 'border-box',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                padding: '13px 24px',
+                background: '#c8a96e', color: '#012116',
+                borderRadius: 7, fontWeight: 800, fontSize: '.88rem',
+                textDecoration: 'none', letterSpacing: '.5px',
               }}>
-                <IconHeart size={16} color="#012116" />
-                Bağış Yap
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#012116" stroke="none">
+                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                </svg>
+                BAĞIŞ YAP
               </Link>
             </div>
 
-            {/* Sağ: İletişim Bilgileri + Sosyal */}
-            <div>
-              <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#012116', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '1px' }}>İletişim</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '24px' }}>
-                <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                  <IconMapPin size={16} color="var(--accent)" style={{ flexShrink: 0, marginTop: 2 }} />
-                  <span style={{ color: '#555', fontSize: '.87rem', lineHeight: 1.5 }}>{SITE.address}</span>
-                </div>
-                <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                  <IconPhone size={16} color="var(--accent)" style={{ flexShrink: 0 }} />
-                  <a href={`tel:${SITE.phone.replace(/\s/g,'')}`} style={{ color: '#555', fontSize: '.87rem', textDecoration: 'none' }}>{SITE.phone}</a>
-                </div>
-                <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                  <IconMail size={16} color="var(--accent)" style={{ flexShrink: 0 }} />
-                  <a href={`mailto:${SITE.email}`} style={{ color: '#555', fontSize: '.87rem', textDecoration: 'none' }}>{SITE.email}</a>
-                </div>
+            {/* Sağ: Gönüllü Ol */}
+            <div style={{ paddingTop: 8 }}>
+              {/* Volunteer SVG icon */}
+              <div style={{ marginBottom: 16 }}>
+                <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="#c8a96e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M32 48s-16-10-16-22a12 12 0 0116-11.4A12 12 0 0148 26c0 12-16 22-16 22z" strokeWidth="2"/>
+                  <circle cx="32" cy="20" r="6"/>
+                  <path d="M20 56v-6a8 8 0 018-8h8a8 8 0 018 8v6"/>
+                </svg>
               </div>
-              {/* Social icons */}
-              <h4 style={{ fontSize: '.75rem', fontWeight: 700, color: '#888', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '12px' }}>Bizi Takip Edin</h4>
-              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                {SOCIAL_LINKS.map(s => (
-                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" title={s.label}
-                    style={{
-                      width: 38, height: 38,
-                      borderRadius: '8px',
-                      border: '1.5px solid #ddd',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: '#666',
-                      transition: 'all .2s',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    {s.icon}
-                  </a>
-                ))}
-              </div>
+              <h3 style={{
+                color: '#012116', fontWeight: 800, fontSize: '.95rem',
+                letterSpacing: '.5px', textTransform: 'uppercase', lineHeight: 1.3, marginBottom: 12,
+              }}>GÖNÜLLÜ OL,<br />İYİLİĞE ORTAK OL</h3>
+              <p style={{ color: '#666', fontSize: '.84rem', lineHeight: 1.65, marginBottom: 22 }}>
+                Siz de gönüllü olarak iyilik hareketimizin bir parçası olabilir, daha fazla hayata dokunabilirsiniz.
+              </p>
+              <Link href="/iletisim" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                padding: '11px 22px',
+                border: '2px solid #012116', color: '#012116',
+                borderRadius: 6, fontWeight: 700, fontSize: '.8rem',
+                letterSpacing: '.5px', textDecoration: 'none',
+                transition: 'all .2s',
+              }}>
+                GÖNÜLLÜ BAŞVURUSU YAP <IconArrowRight size={13} color="#012116" />
+              </Link>
             </div>
           </div>
         </div>
         <style>{`
-          @media (max-width: 900px) { .bottom-three-grid { grid-template-columns: 1fr 1fr !important; } }
-          @media (max-width: 600px) { .bottom-three-grid { grid-template-columns: 1fr !important; } }
+          @media (max-width: 960px)  { .saye-bottom-grid { grid-template-columns: 1fr 1fr !important; } }
+          @media (max-width: 600px)  { .saye-bottom-grid { grid-template-columns: 1fr !important; } }
         `}</style>
       </section>
     </>

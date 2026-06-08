@@ -1,14 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Dancing_Script } from 'next/font/google';
-
-const dancingScript = Dancing_Script({
-  subsets: ['latin'],
-  weight: ['700'],
-  variable: '--font-dancing',
-  display: 'swap',
-});
-import TopBar from '@/components/TopBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingButtons from '@/components/FloatingButtons';
@@ -16,6 +8,13 @@ import Chatbot from '@/components/Chatbot';
 import MobileBottomNav from '@/components/MobileBottomNav';
 import { SITE } from '@/lib/constants';
 import { getAyarlar } from '@/lib/cms';
+
+const dancingScript = Dancing_Script({
+  subsets: ['latin'],
+  weight: ['700'],
+  variable: '--font-dancing',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: { default: SITE.name, template: `%s | ${SITE.name}` },
@@ -37,7 +36,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="tr" className={dancingScript.variable}>
       <body>
-        <TopBar />
         <Header logoUrl={logoUrl} siteName={siteName} tagline={tagline} />
         <main>{children}</main>
         <Footer />
