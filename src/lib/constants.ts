@@ -1,5 +1,5 @@
 export const SITE = {
-  name: 'Vakfımız',
+  name: 'Saye',
   tagline: 'İnsanlığa Hizmet',
   description: 'Yardıma muhtaç insanlara ulaşan, şeffaf ve güvenilir yardım vakfı.',
   phone: '+90 500 123 45 67',
