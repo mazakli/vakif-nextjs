@@ -48,12 +48,12 @@ export default function HeroSlider({ cmsSlides }: { cmsSlides?: Slide[] }) {
   };
 
   return (
-    <section style={{ position: 'relative', height: 'min(90vh, 680px)', overflow: 'hidden' }}>
+    <section style={{ position: 'relative', height: 'min(92vh, 700px)', overflow: 'hidden' }}>
       {/* Background */}
       {slides.map((s, i) => (
         <div key={i} style={{
           position: 'absolute', inset: 0,
-          background: `linear-gradient(rgba(1,33,22,0.65), rgba(1,33,22,0.75)), url(${(s as any).gorsel_url || (s as any).image || ''}) center/cover no-repeat`,
+          background: `linear-gradient(rgba(1,33,22,0.55), rgba(1,33,22,0.70)), url(${(s as any).gorsel_url || (s as any).image || ''}) center/cover no-repeat`,
           opacity: i === current ? 1 : 0,
           transition: 'opacity .7s ease',
           zIndex: 0,
@@ -63,31 +63,37 @@ export default function HeroSlider({ cmsSlides }: { cmsSlides?: Slide[] }) {
       {/* Content */}
       <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', alignItems: 'center' }}>
         <div className="container">
-          <div style={{ maxWidth: 680, opacity: isAnimating ? 0 : 1, transform: isAnimating ? 'translateY(16px)' : 'translateY(0)', transition: 'all .5s ease' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(200,169,110,.2)', border: '1px solid rgba(200,169,110,.4)', borderRadius: '20px', padding: '5px 14px', marginBottom: '20px' }}>
-              <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent)', display: 'inline-block' }} />
-              <span style={{ color: 'var(--accent)', fontSize: '.8rem', fontWeight: 600, letterSpacing: '1px' }}>İNSANLIĞA HİZMET</span>
-            </div>
-            <h1 style={{ color: '#fff', fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginBottom: '20px', lineHeight: 1.2 }}>
+          <div style={{ maxWidth: 720, opacity: isAnimating ? 0 : 1, transform: isAnimating ? 'translateY(20px)' : 'translateY(0)', transition: 'all .5s ease' }}>
+            {/* Script / cursive main heading */}
+            <h1 style={{
+              fontFamily: 'var(--font-dancing), "Dancing Script", cursive',
+              color: '#fff',
+              fontSize: 'clamp(3rem, 7vw, 5.5rem)',
+              fontWeight: 700,
+              marginBottom: '12px',
+              lineHeight: 1.1,
+              textShadow: '0 2px 20px rgba(0,0,0,.3)',
+            }}>
               {slide.title}
+              <span style={{ color: 'var(--accent)', marginLeft: '4px' }}>&#9829;</span>
             </h1>
-            <p style={{ color: 'rgba(255,255,255,.85)', fontSize: '1.1rem', marginBottom: '36px', lineHeight: 1.7 }}>
+            <p style={{ color: 'rgba(255,255,255,.88)', fontSize: '1.05rem', marginBottom: '36px', lineHeight: 1.75, maxWidth: 560 }}>
               {slide.text}
             </p>
-            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
+              <Link href="/bagis-yap" style={{
+                padding: '14px 34px', background: 'var(--accent)', color: '#012116',
+                borderRadius: '6px', fontWeight: 800, textDecoration: 'none',
+                display: 'inline-flex', alignItems: 'center', gap: '8px',
+                fontSize: '1rem', letterSpacing: '.3px',
+              }}>BAĞIŞ YAP</Link>
               <Link href={slide.btn1.href} style={{
-                padding: '14px 32px', background: 'var(--accent)', color: '#012116',
+                padding: '14px 34px', background: 'transparent', color: '#fff',
                 borderRadius: '6px', fontWeight: 700, textDecoration: 'none',
+                border: '2px solid rgba(255,255,255,.55)',
                 display: 'inline-flex', alignItems: 'center', gap: '8px',
-                transition: 'transform .2s',
-              }}>{slide.btn1.label}</Link>
-              <Link href={slide.btn2.href} style={{
-                padding: '14px 32px', background: 'transparent', color: '#fff',
-                borderRadius: '6px', fontWeight: 700, textDecoration: 'none',
-                border: '2px solid rgba(255,255,255,.5)',
-                display: 'inline-flex', alignItems: 'center', gap: '8px',
-                transition: 'border-color .2s',
-              }}>{slide.btn2.label}</Link>
+                fontSize: '.95rem', letterSpacing: '.3px',
+              }}>FAALİYETLERİMİZİ İNCELE</Link>
             </div>
           </div>
         </div>

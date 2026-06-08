@@ -3,18 +3,8 @@ import Link from 'next/link';
 import { SITE, FOOTER_LINKS } from '@/lib/constants';
 import {
   IconPhone, IconMail, IconMapPin, IconHeart, IconArrowRight,
-  IconFood, IconWater, IconEducation, IconHealth, IconHouse, IconOrphan,
   IconChevronRight,
 } from './Icons';
-
-const SECTORS = [
-  { label: 'Gıda Yardımı',    desc: 'Aç kalmasın',        Icon: IconFood },
-  { label: 'Temiz Su',        desc: 'Su hakkı herkese',   Icon: IconWater },
-  { label: 'Eğitim',         desc: 'Gelecek inşa',        Icon: IconEducation },
-  { label: 'Sağlık',         desc: 'Sağlıklı yaşam',     Icon: IconHealth },
-  { label: 'Barınma',        desc: 'Güvenli ev',          Icon: IconHouse },
-  { label: 'Yetim Desteği',  desc: 'Umut ol',             Icon: IconOrphan },
-];
 
 const SOCIAL_LINKS = [
   {
@@ -56,80 +46,6 @@ const SOCIAL_LINKS = [
 export default function Footer() {
   return (
     <footer style={{ background: '#010e09', color: 'var(--cream)' }}>
-
-      {/* ── Hizmet Alanlarımız ── tam genişlik, footer'ın içinde */}
-      <div style={{ background: 'var(--dark-green)', borderBottom: '1px solid rgba(244,233,216,.06)', padding: '64px 0' }}>
-        <div className="container">
-          {/* Başlık */}
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <span style={{
-              display: 'inline-block', background: 'rgba(200,169,110,.12)',
-              border: '1px solid rgba(200,169,110,.3)', color: 'var(--accent)',
-              padding: '5px 16px', borderRadius: '20px',
-              fontSize: '.75rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase',
-              marginBottom: '16px',
-            }}>Hizmet Alanlarımız</span>
-            <h2 style={{ color: '#fff', fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: 800, margin: 0 }}>
-              Nerede İhtiyaç Varsa Oradayız
-            </h2>
-          </div>
-
-          {/* İkon Grid */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(6, 1fr)',
-            gap: '2px',
-          }}>
-            {SECTORS.map(({ label, desc, Icon }) => (
-              <div
-                key={label}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  padding: '36px 16px 32px',
-                  background: 'rgba(244,233,216,.03)',
-                  borderRadius: '4px',
-                  transition: 'background .3s',
-                  cursor: 'default',
-                  gap: '14px',
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(200,169,110,.08)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(244,233,216,.03)'; }}
-              >
-                {/* İkon çerçevesi */}
-                <div style={{
-                  width: 88, height: 88,
-                  borderRadius: '24px',
-                  background: 'rgba(200,169,110,.1)',
-                  border: '1.5px solid rgba(200,169,110,.25)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'var(--accent)',
-                  transition: 'all .3s',
-                }}>
-                  <Icon size={46} color="var(--accent)" />
-                </div>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ color: '#fff', fontWeight: 700, fontSize: '1rem', marginBottom: '4px' }}>{label}</div>
-                  <div style={{ color: 'rgba(244,233,216,.5)', fontSize: '.78rem', letterSpacing: '.3px' }}>{desc}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Responsive CSS */}
-          <style>{`
-            @media (max-width: 900px) {
-              .sector-grid { grid-template-columns: repeat(3,1fr) !important; }
-            }
-            @media (max-width: 540px) {
-              .sector-grid { grid-template-columns: repeat(2,1fr) !important; }
-            }
-          `}</style>
-        </div>
-      </div>
 
       {/* ── Ana Footer İçeriği ── */}
       <div style={{ padding: '64px 0 0' }}>
