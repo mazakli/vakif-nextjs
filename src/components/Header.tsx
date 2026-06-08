@@ -48,25 +48,74 @@ export default function Header({ logoUrl, siteName, tagline }: HeaderProps) {
           {/* ── Logo ── */}
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', flexShrink: 0, marginRight: 28 }}>
             {logoUrl ? (
-              <img src={logoUrl} alt={displayName} style={{ width: 46, height: 46, borderRadius: '50%', objectFit: 'cover' }} />
+              <img src={logoUrl} alt={displayName} style={{ width: 50, height: 50, objectFit: 'contain' }} />
             ) : (
-              /* SAYE-style logo */
-              <svg width="46" height="46" viewBox="0 0 60 60" fill="none">
-                <circle cx="30" cy="30" r="28" fill="rgba(200,169,110,0.15)" stroke="#c8a96e" strokeWidth="1.5"/>
-                <path d="M30 42s-13-8-13-17a7.5 7.5 0 0113-5.14A7.5 7.5 0 0143 25c0 9-13 17-13 17z" fill="#c8a96e"/>
-                <line x1="30" y1="22" x2="30" y2="14" stroke="#012116" strokeWidth="2" strokeLinecap="round"/>
-                <path d="M30 18c-1.5-2.5-4-2.5-4-2.5s0 2.5 2 3.5" stroke="#012116" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-                <path d="M30 17c1.5-2.5 4-2.5 4-2.5s0 2.5-2 3.5" stroke="#012116" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+              /* SAYE logo — kalp + eller + fidan */
+              <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Dış çember */}
+                <circle cx="50" cy="50" r="47" fill="rgba(200,169,110,0.08)" stroke="#c8a96e" strokeWidth="2"/>
+
+                {/* Sol el / kol — aşağıdan içe doğru kıvrılan yay */}
+                <path
+                  d="M18 78 C14 62 20 44 32 36"
+                  stroke="#c8a96e" strokeWidth="5" fill="none"
+                  strokeLinecap="round"
+                />
+                {/* Sol el ucu — içe dönen küçük kıvrım */}
+                <path
+                  d="M32 36 C36 33 40 34 42 38"
+                  stroke="#c8a96e" strokeWidth="4.5" fill="none"
+                  strokeLinecap="round"
+                />
+
+                {/* Sağ el / kol */}
+                <path
+                  d="M82 78 C86 62 80 44 68 36"
+                  stroke="#c8a96e" strokeWidth="5" fill="none"
+                  strokeLinecap="round"
+                />
+                {/* Sağ el ucu */}
+                <path
+                  d="M68 36 C64 33 60 34 58 38"
+                  stroke="#c8a96e" strokeWidth="4.5" fill="none"
+                  strokeLinecap="round"
+                />
+
+                {/* Kalp */}
+                <path
+                  d="M50 74
+                     C50 74 26 58 26 44
+                     A14 14 0 0 1 50 40
+                     A14 14 0 0 1 74 44
+                     C74 58 50 74 50 74Z"
+                  fill="#c8a96e"
+                />
+
+                {/* Fidan sapı — kalpten yukarı */}
+                <line x1="50" y1="38" x2="50" y2="22"
+                  stroke="#c8a96e" strokeWidth="3.5" strokeLinecap="round"/>
+
+                {/* Sol yaprak */}
+                <path
+                  d="M50 30 C46 22 36 21 36 21
+                     C36 26 42 31 49 30Z"
+                  fill="#c8a96e"
+                />
+
+                {/* Sağ yaprak */}
+                <path
+                  d="M50 26 C54 18 64 17 64 17
+                     C64 22 58 27 51 26Z"
+                  fill="#c8a96e"
+                />
               </svg>
             )}
             <div>
-              <div style={{ color: '#c8a96e', fontWeight: 900, fontSize: '1.25rem', lineHeight: 1, letterSpacing: '1px' }}>
+              <div style={{ color: '#c8a96e', fontWeight: 900, fontSize: '1.3rem', lineHeight: 1, letterSpacing: '2px' }}>
                 {displayName.toUpperCase()}
               </div>
-              <div style={{ color: 'rgba(244,233,216,.6)', fontSize: '.55rem', letterSpacing: '1.2px', fontWeight: 600, lineHeight: 1.3, textTransform: 'uppercase', marginTop: 2 }}>
-                {(tagline || 'SOSYAL YARDIMLAŞMA').split(' ').map((word, i) => (
-                  <span key={i}>{word} </span>
-                ))}
+              <div style={{ color: 'rgba(244,233,216,.55)', fontSize: '.52rem', letterSpacing: '1.5px', fontWeight: 600, lineHeight: 1.4, textTransform: 'uppercase', marginTop: 3 }}>
+                SOSYAL YARDIMLAŞMA<br />VE KÜLTÜR VAKFI
               </div>
             </div>
           </Link>

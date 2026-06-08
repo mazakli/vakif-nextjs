@@ -311,13 +311,17 @@ export default async function HomePage() {
               padding: '36px 28px',
               textAlign: 'center',
             }}>
-              {/* Logo */}
-              <svg width="52" height="52" viewBox="0 0 60 60" fill="none" style={{ margin: '0 auto 14px' }}>
-                <circle cx="30" cy="30" r="28" fill="rgba(200,169,110,0.2)" stroke="#c8a96e" strokeWidth="1.5"/>
-                <path d="M30 42s-13-8-13-17a7.5 7.5 0 0113-5.14A7.5 7.5 0 0143 25c0 9-13 17-13 17z" fill="#c8a96e"/>
-                <line x1="30" y1="22" x2="30" y2="14" stroke="#012116" strokeWidth="2" strokeLinecap="round"/>
-                <path d="M30 18c-1.5-2.5-4-2.5-4-2.5s0 2.5 2 3.5" stroke="#012116" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
-                <path d="M30 17c1.5-2.5 4-2.5 4-2.5s0 2.5-2 3.5" stroke="#012116" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
+              {/* SAYE Logo */}
+              <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ margin: '0 auto 14px', display: 'block' }}>
+                <circle cx="50" cy="50" r="47" fill="rgba(200,169,110,0.12)" stroke="#c8a96e" strokeWidth="2"/>
+                <path d="M18 78 C14 62 20 44 32 36" stroke="#c8a96e" strokeWidth="5" fill="none" strokeLinecap="round"/>
+                <path d="M32 36 C36 33 40 34 42 38" stroke="#c8a96e" strokeWidth="4.5" fill="none" strokeLinecap="round"/>
+                <path d="M82 78 C86 62 80 44 68 36" stroke="#c8a96e" strokeWidth="5" fill="none" strokeLinecap="round"/>
+                <path d="M68 36 C64 33 60 34 58 38" stroke="#c8a96e" strokeWidth="4.5" fill="none" strokeLinecap="round"/>
+                <path d="M50 74 C50 74 26 58 26 44 A14 14 0 0 1 50 40 A14 14 0 0 1 74 44 C74 58 50 74 50 74Z" fill="#c8a96e"/>
+                <line x1="50" y1="38" x2="50" y2="22" stroke="#c8a96e" strokeWidth="3.5" strokeLinecap="round"/>
+                <path d="M50 30 C46 22 36 21 36 21 C36 26 42 31 49 30Z" fill="#c8a96e"/>
+                <path d="M50 26 C54 18 64 17 64 17 C64 22 58 27 51 26Z" fill="#c8a96e"/>
               </svg>
               {/* Script yazı */}
               <div style={{
